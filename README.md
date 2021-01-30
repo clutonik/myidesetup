@@ -2,4 +2,4 @@
 
 ### List of files
 
-- spacemacs.env
+- spacemacs
