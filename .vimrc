@@ -6,7 +6,7 @@ syntax on " Enable syntax highlighting
 call plug#begin('~/.vim/plugged')
 
 Plug 'nvim-telescope/telescope.nvim'
-Plug 'gruvbox-community/gruvbox'
+Plug 'morhetz/gruvbox'
 Plug 'tpope/vim-fugitive'
 Plug 'mbbill/undotree'
 Plug 'scrooloose/nerdtree'
@@ -19,10 +19,20 @@ Plug 'itchyny/lightline.vim'
 " python
 Plug 'python-mode/python-mode'
 Plug 'vim-scripts/indentpython.vim'
-Plug 'python-rope/ropevim'
-" Plug 'Valloric/YouCompleteMe'
+" Plug 'python-rope/ropevim'
+Plug 'Valloric/YouCompleteMe'
 Plug 'nvie/vim-flake8'
 Plug 'majutsushi/tagbar'
+" Code snippets
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+" ES2015 code snippets
+" Plug 'epilande/vim-es2015-snippets'
+" React code snippets
+Plug 'epilande/vim-react-snippets'
+" Code formatting
+Plug 'sbdchd/neoformat'
+
 
 call plug#end()
 
@@ -85,7 +95,6 @@ let g:ctrlp_working_path_mode = 'ra'
 map <leader>ff :CtrlP<CR><Space>
 noremap <C-f> <Esc><Esc>:Lines!<CR>
 " map <leader>gc <Esc><Esc>:BCommits!<CR>
-"
 
 " python
 " --------------------------------
@@ -116,10 +125,22 @@ let g:pymode_syntax=1
 " General
 let python_highlight_all=1
 
+
+" Code snippet triggers
+let g:UltiSnipsExpandTrigger="<c-l>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+
+" Autocommands
 " javascript, html and css
 " Indentation autocmds
-autocmd BufNewFile,BufRead *.js, *.html, *.css
+autocmd BufNewFile,BufRead *.js,*.html,*.css
     \ set tabstop=2 |
     \ set softtabstop=2 |
     \ set shiftwidth=2
 
+" Autocommand to run neoformat for js
+autocmd BufWritePre *.js Neoformat prettier
+" autocmd FileType javascript setlocal formatprg=prettier\ --single-quote\ --trailing-comma\ es5
+" Use formatprg when available
+" let g:neoformat_try_formatprg = 1
